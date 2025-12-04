@@ -87,6 +87,83 @@ class CoinRewardWrapper(gym.Wrapper):
         self.num_coins = info['coins']
         return obs, reward, done, info
 
+# mushroom奖励wrapper
+
+
+class MushroomRewardWrapper(gym.Wrapper):
+    """
+    Overview:
+        add mushroom reward
+    Interface:
+        ``__init__``, ``step``
+    Properties:
+        - env (:obj:`gym.Env`): the environment to wrap.
+    """
+
+    def __init__(self, env: gym.Env):
+        super().__init__(env)
+        self.prev_status = 0
+        self._status_map = {'small': 0, 'tall': 1, 'fireball': 2}
+
+    def step(self, action):
+        obs, reward, done, info = self.env.step(action)
+        curr_status = self._status_map.get(info.get('status'), self.prev_status)
+        if curr_status > self.prev_status:
+            reward += 50
+        self.prev_status = curr_status
+        return obs, reward, done, info
+
+
+# 记录额外信息的wrapper (用于TensorBoard可视化)
+class ExtraInfoWrapper(gym.Wrapper):
+    """
+    Overview:
+        记录金币、状态等额外信息到 episode_info，用于 TensorBoard 可视化
+    Interface:
+        ``__init__``, ``step``, ``reset``
+    Properties:
+        - env (:obj:`gym.Env`): the environment to wrap.
+    """
+
+    def __init__(self, env: gym.Env):
+        super().__init__(env)
+        self._status_map = {'small': 0, 'tall': 1, 'fireball': 2}
+        self.max_coins = 0
+        self.max_status = 0
+        self.total_coins_collected = 0
+
+    def reset(self, **kwargs):
+        self.max_coins = 0
+        self.max_status = 0
+        self.total_coins_collected = 0
+        return self.env.reset(**kwargs)
+
+    def step(self, action):
+        obs, reward, done, info = self.env.step(action)
+
+        # 记录金币信息
+        current_coins = info.get('coins', 0)
+        if current_coins > self.max_coins:
+            self.total_coins_collected += (current_coins - self.max_coins)
+            self.max_coins = current_coins
+
+        # 记录状态信息 (small=0, tall=1, fireball=2)
+        current_status = self._status_map.get(info.get('status', 'small'), 0)
+        if current_status > self.max_status:
+            self.max_status = current_status
+
+        # 在 episode 结束时，将额外信息添加到 info 中
+        if done:
+            if 'episode_info' not in info:
+                info['episode_info'] = {}
+            info['episode_info']['coins_collected'] = self.total_coins_collected
+            info['episode_info']['max_status'] = self.max_status
+            info['episode_info']['final_coins'] = current_coins
+            info['episode_info']['x_pos'] = info.get('x_pos', 0)
+            info['episode_info']['flag_get'] = int(info.get('flag_get', False))
+
+        return obs, reward, done, info
+
 
 # CAM相关，不需要了解
 def dump_arr2video(arr, video_folder):
@@ -114,7 +191,7 @@ def get_cam(img, model):
     input_tensor = torch.from_numpy(img).unsqueeze(0)
 
     # Construct the CAM object once, and then re-use it on many images:
-    cam = GradCAM(model=model, target_layers=target_layers, use_cuda=True)
+    cam = GradCAM(model=model, target_layers=target_layers)
     targets = None
 
     # You can also pass aug_smooth=True and eigen_smooth=True, to apply smoothing.
