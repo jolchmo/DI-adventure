@@ -1,0 +1,30 @@
+[project]
+name = "mario-dqn"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "di-engine",
+    "grad-cam>=1.5.5",
+    "gym==0.25.1",
+    "gym-super-mario-bros==7.4.0",
+    "opencv-python==4.6.0.66",
+    "tensorboard==2.10.1",
+    "torch>=2.5.1",
+]
+
+[tool.uv.sources]
+di-engine = { git = "http://github.com/opendilab/DI-engine", rev = "main" }
+torch = [
+  { index = "pytorch-cu121", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[tool.uv.pip]
+index-url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+extra-index-url = ["https://mirrors.aliyun.com/pypi/simple/"]
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
