@@ -23,10 +23,14 @@
 ![alt text](mario_dqn/mario_panorama.png)
 
 2. 马里奥的各动作Q值显示
-马里奥在
-<video controls src="mario_dqn/q_visualization/mario_v0_2a_4f.mp4" title="Title"></video>
+在顺利通关的前提下，只有2个动作时，马里奥在各个env_step的动作Q值
 
-<video controls src="mario_dqn/q_visualization/mario_v0_7a_4f.mp4" title="Title"></video>
+![Mario 2a](mario_dqn/q_visualization/mario_v0_2a_4f.gif)
+
+在顺利通关的前提下，只有7个动作时，马里奥在各个env_step的动作Q值
+
+![Mario 7a](mario_dqn/q_visualization/mario_v0_7a_4f.gif)
+
 
 # 1.1 本项目使用uv进行包管理，只需要uv sync则可完成环境设置
 ```
