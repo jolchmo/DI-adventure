@@ -8,12 +8,11 @@ from model import DQN
 from policy import DQNPolicy
 from ding.config import compile_config
 from ding.envs import DingEnvWrapper
-import os
 import gym_super_mario_bros
 from gym_super_mario_bros.actions import SIMPLE_MOVEMENT, COMPLEX_MOVEMENT
 from nes_py.wrappers import JoypadSpace
 from wrapper import MaxAndSkipWrapper, WarpFrameWrapper, ScaledFloatFrameWrapper, FrameStackWrapper, \
-    FinalEvalRewardEnv, RecordCAM
+    FinalEvalRewardEnv, RecordCAM, ExtraInfoWrapper
 
 action_dict = {2: [["right"], ["right", "A"]], 7: SIMPLE_MOVEMENT, 12: COMPLEX_MOVEMENT}
 action_nums = [2, 7, 12]
@@ -28,8 +27,9 @@ def wrapped_mario_env(model, cam_video_path, version=0, action=2, obs=1):
                 lambda env: WarpFrameWrapper(env, size=84),
                 lambda env: ScaledFloatFrameWrapper(env),
                 lambda env: FrameStackWrapper(env, n_frames=obs),
+                lambda env: ExtraInfoWrapper(env),
                 lambda env: FinalEvalRewardEnv(env),
-                lambda env: RecordCAM(env, cam_model=model, video_folder=cam_video_path, name_prefix='mario_cam_v'+str(version)+'_'+str(action)+'a_'+str(obs)+'f')
+                lambda env: RecordCAM(env, cam_model=model, video_folder=cam_video_path)
             ]
         }
     )
@@ -78,60 +78,19 @@ def evaluate(args, state_dict, seed, video_dir_path, eval_times):
         pass
 
 
-#exp map:
-     # python -u mario_dqn_main.py -s 2 -v 0 -a 7 -o 1
-    # python -u mario_dqn_main.py -s 2 -v 0 -a 2 -o 1
-    # python -u mario_dqn_main.py -s 2 -v 0 -a 7 -o 4
-    # python -u mario_dqn_main.py -s 2 -v 0 -a 2 -o 4
-    # python -u mario_dqn_main.py -s 2 -v 1 -a 2 -o 4
-
-
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--exp", "-e", type=int, default=None)
-    parser.add_argument("--seed", "-s", type=int, default=2)
+    parser.add_argument("--seed", "-s", type=int, default=0)
     parser.add_argument("--checkpoint", "-ckpt", type=str, default='./exp/v0_1a_7f_seed0/ckpt/ckpt_best.pth.tar')
     parser.add_argument("--replay_path", "-rp", type=str, default='./eval_videos')
-    parser.add_argument("--version", "-v", type=int, default=0, choices=[0,1,2,3])
-    parser.add_argument("--action", "-a", type=int, default=7, choices=[2,7,12])
-    parser.add_argument("--obs", "-o", type=int, default=1, choices=[1,4])
+    parser.add_argument("--version", "-v", type=int, default=0, choices=[0, 1, 2, 3])
+    parser.add_argument("--action", "-a", type=int, default=7, choices=[2, 7, 12])
+    parser.add_argument("--obs", "-o", type=int, default=1, choices=[1, 4])
     args = parser.parse_args()
-
-    if args.exp == 1 or args.exp == 71:
-        v,a,o,e = 0,7,1,1
-    elif   args.exp == 2 or args.exp == 21:
-        v,a,o,e = 0,2,1,2
-    elif   args.exp == 3 or args.exp == 74:
-        v,a,o,e = 0,7,4,3
-    elif   args.exp == 4 or args.exp == 24:
-        v,a,o,e = 0,2,4,4
-    elif   args.exp == 5 or args.exp == 124:
-        v,a,o,e = 1,2,4,5
-    elif args.exp == 6 or args.exp == 1124:
-        v,a,o,e = 1,12,4,6
-    
-    # other experiments without baseline
-    elif args.exp == 224:
-        v,a,o,e = 2,2,4,224
-    elif args.exp == 324:
-        v,a,o,e = 3,2,4,324
-    elif args.exp == 3124:
-        v,a,o,e = 3,12,4,3124
-    
-    
-    if args.exp != None:
-        args.version = v
-        args.action = a
-        args.obs = o
-        args.exp = e
-        args.checkpoint = f"~/WS/DI-adventure/mario_dqn/exp/v{args.version}_{args.action}a_{args.obs}f_seed{args.seed}/ckpt/ckpt_best.pth.tar"  
-        args.replay_path += f"/mario_exp{args.exp}_v{args.version}_{args.action}a_{args.obs}f_seed{args.seed}"
-    
-    mario_dqn_config.policy.model.obs_shape=[args.obs, 84, 84]
-    mario_dqn_config.policy.model.action_shape=args.action
-    ckpt_path = os.path.expanduser(args.checkpoint)
-    video_dir_path = os.path.expanduser(args.replay_path)
+    mario_dqn_config.policy.model.obs_shape = [args.obs, 84, 84]
+    mario_dqn_config.policy.model.action_shape = args.action
+    ckpt_path = args.checkpoint
+    video_dir_path = args.replay_path
     state_dict = torch.load(ckpt_path, map_location='cpu')
-    
     evaluate(args, state_dict=state_dict, seed=args.seed, video_dir_path=video_dir_path, eval_times=1)

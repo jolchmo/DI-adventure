@@ -1,3 +1,5 @@
 __pycache__
 exp*
 *video*
+note/
+mario_dqn/q_visualization/

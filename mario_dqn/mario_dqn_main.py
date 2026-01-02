@@ -57,7 +57,7 @@ def wrapped_mario_env(version=0, action=7, obs=1):
     )
 
 
-def main(cfg, args, seed=0, max_env_step=int(5e6)):
+def main(cfg, args, seed=0, max_env_step=int(3e6)):
     # Easydict类实例，包含一些配置
     cfg = compile_config(
         cfg,
@@ -89,8 +89,16 @@ def main(cfg, args, seed=0, max_env_step=int(5e6)):
     # 为torch、numpy、random等package设置种子
     set_pkg_seed(seed, use_cuda=cfg.policy.cuda)
 
+    # 设置 PyTorch 以减少内存碎片和优化 cuDNN
+    if cfg.policy.cuda and torch.cuda.is_available():
+        torch.backends.cudnn.benchmark = False  # 禁用自动调优以减少内存使用
+        torch.backends.cudnn.deterministic = True  # 使用确定性算法
+        # 清空 CUDA 缓存
+        torch.cuda.empty_cache()
+
     # 采用DQN模型
     model = DQN(**cfg.policy.model)
+
     # 采用DQN策略
     policy = DQNPolicy(cfg.policy, model=model)
 

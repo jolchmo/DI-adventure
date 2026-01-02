@@ -3,7 +3,10 @@ wrapper定义文件
 """
 from typing import Union, List, Tuple, Callable
 from ding.envs.env_wrappers import MaxAndSkipWrapper, WarpFrameWrapper, ScaledFloatFrameWrapper, FrameStackWrapper, \
-    FinalEvalRewardEnv
+    EvalEpisodeReturnWrapper
+
+# 兼容旧代码
+FinalEvalRewardEnv = EvalEpisodeReturnWrapper
 import gym
 import numpy as np
 import cv2
@@ -27,7 +30,7 @@ class StickyActionWrapper(gym.ActionWrapper):
         - ``p_sticky``: possibility to select the last action
     """
 
-    def __init__(self, env: gym.Env, p_sticky: float=0.25):
+    def __init__(self, env: gym.Env, p_sticky: float = 0.25):
         super().__init__(env)
         self.p_sticky = p_sticky
         self.last_action = 0
