@@ -1,0 +1,47 @@
+5d20061
+
+commit 5d200614d5f61e5ff50e27170e12828fbcef757f
+Merge: 45e364b 3807b77
+Author: zerlinwang <80957609+zerlinwang@users.noreply.github.com>
+Date:   Fri Dec 9 15:19:13 2022 +0800
+
+    Merge pull request #14 from opendilab/polish-notion
+    
+    polish(wzl): polish config notation
+
+commit 3807b7775d219d3ef74f2e0a66cc50bdfbbfdca6
+Author: zerlinwang <im.wangzilin@gmail.com>
+Date:   Fri Dec 9 15:18:13 2022 +0800
+
+    polish(wzl): polish config notation
+
+ mario_dqn/README.md           | 2 ++
+ mario_dqn/mario_dqn_config.py | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 45e364bcce0dee7bbf18dde90df0c57ffe19364a
+Merge: 04b452d bf2e653
+Author: zerlinwang <80957609+zerlinwang@users.noreply.github.com>
+Date:   Thu Dec 8 17:15:25 2022 +0800
+
+    Merge pull request #13 from opendilab/repair-engine-commitid
+    
+    repair(wzl): change diengine commit id to 4c607d400d3290a27ad1e5b7fa8…
+
+commit bf2e653e5d0d6b3b8b9eaa0f92a5dac1233e9029
+Author: zerlinwang <im.wangzilin@gmail.com>
+Date:   Thu Dec 8 17:14:02 2022 +0800
+
+    repair(wzl): change diengine commit id to 4c607d400d3290a27ad1e5b7fa8eeb4c2a1a4745
+
+ mario_dqn/README.md | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+commit 04b452d39bbb3481294d2b7d65e080ef65da79d8
+Merge: bacf08a 089335d
+Author: zerlinwang <80957609+zerlinwang@users.noreply.github.com>
+Date:   Wed Nov 30 11:44:28 2022 +0800
+
+    Merge pull request #12 from opendilab/fix-actionspace
+    
+    fix(wzl): fix preset action space error in evaluate and main

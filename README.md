@@ -23,7 +23,10 @@
 ![alt text](mario_dqn/mario_panorama.png)
 
 2. 马里奥的各动作Q值显示
+马里奥在
+<video controls src="mario_dqn/q_visualization/mario_v0_2a_4f.mp4" title="Title"></video>
 
+<video controls src="mario_dqn/q_visualization/mario_v0_7a_4f.mp4" title="Title"></video>
 
 # 1.1 本项目使用uv进行包管理，只需要uv sync则可完成环境设置
 ```
