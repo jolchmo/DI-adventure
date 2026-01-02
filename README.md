@@ -18,17 +18,16 @@
 │   └── wrapper.py                          --> 各式各样的装饰器实现
 └── README.md
 ```
-# 本项目，同时还进行一些可视化工作：
+# 本项目主要有两个亮点，1. 可视化，2.丰富的对比实验和多种子对比：
 1. 长图的马里奥展示(mario_dqn_visualize)
 ![alt text](mario_dqn/mario_panorama.png)
 
 2. 马里奥的各动作Q值显示
-在顺利通关的前提下，只有2个动作时，马里奥在各个env_step的动作Q值
 
+在顺利通关的前提下，只有2个动作时，马里奥在各个env_step的动作Q值
 ![Mario 2a](mario_dqn/q_visualization/mario_v0_2a_4f.gif)
 
 在顺利通关的前提下，只有7个动作时，马里奥在各个env_step的动作Q值
-
 ![Mario 7a](mario_dqn/q_visualization/mario_v0_7a_4f.gif)
 
 
