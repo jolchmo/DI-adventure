@@ -48,22 +48,28 @@ https://github.com/user-attachments/assets/8a212a81-9a0e-494c-b1f0-aec7a1232444
 
 
 实验3视频：
-mario_exp3_v0_7a_4f_seed2:
+mario_exp3_v0_7a_4f_seed0:
 
 
 
-https://github.com/user-attachments/assets/5f8e1717-3b68-4577-9748-1c9460f02677
+
+
+https://github.com/user-attachments/assets/41019e5a-5774-49b8-b30a-77ce576c7a4a
+
 
 
 
 
 
 实验4视频：
-mario_exp4_v0_2a_4f_seed2:
+mario_exp4_v0_2a_4f_seed0:
 
 
 
-https://github.com/user-attachments/assets/62e87434-b145-4e8a-b532-92a75f27c706
+
+
+https://github.com/user-attachments/assets/26f15d74-aa02-4c3e-b0d2-9ee4ec271176
+
 
 
 
@@ -79,6 +85,9 @@ mario_exp5_v1_2a_4f_seed2
 https://github.com/user-attachments/assets/bd9ed5da-60a8-4564-a8e4-edb3177b0613
 
 
+实验表格：
+<img width="620" height="341" alt="image" src="https://github.com/user-attachments/assets/cbaa916b-0b4d-48b2-b625-a5c1a8dd1c6a" />
+
 
 
 实验6视频：
@@ -87,6 +96,7 @@ mario_exp6_v1_12a_4f_s
 
 
 https://github.com/user-attachments/assets/c101c8ab-a27d-4104-bbc0-c3ddfd525b9a
+
 
 
 
