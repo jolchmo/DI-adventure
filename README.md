@@ -30,6 +30,45 @@
 在顺利通关的前提下，只有7个动作时，马里奥在各个env_step的动作Q值
 ![Mario 7a](mario_dqn/q_visualization/mario_v0_7a_4f.gif)
 
+实验结果：
+实验1视频：
+mario_exp1_v0_7a_1f_seed2:
+<video src="https://imgbed-hk.oss-cn-hongkong.aliyuncs.com/img/mario_exp1_v0_7a_1f_seed2.mp4" controls="controls" width="500" height="300">
+    您的浏览器不支持播放该视频！
+</video>
+
+实验2视频：
+mario_exp2_v0_2a_1f_seed2：
+<video src="https://imgbed-hk.oss-cn-hongkong.aliyuncs.com/img/mario_exp2_v0_2a_1f_seed2.mp4" controls="controls" width="500" height="300">
+    您的浏览器不支持播放该视频！
+</video>
+<img src=""/>
+
+实验3视频：
+mario_exp3_v0_7a_4f_seed2:
+<video src="https://imgbed-hk.oss-cn-hongkong.aliyuncs.com/img/mario_exp3_v0_7a_4f_seed2.mp4" controls="controls" width="500" height="300">
+    您的浏览器不支持播放该视频！
+</video>
+
+
+实验4视频：
+mario_exp4_v0_2a_4f_seed2:
+<video src="https://imgbed-hk.oss-cn-hongkong.aliyuncs.com/img/mario_exp4_v0_2a_4f_seed2.mp4" controls="controls" width="500" height="300">
+    您的浏览器不支持播放该视频！
+</video>
+
+实验5视频：
+mario_exp5_v1_2a_4f_seed2
+<video src="https://imgbed-hk.oss-cn-hongkong.aliyuncs.com/img/mario_exp5_v1_2a_4f_seed2.mp4" controls="controls" width="500" height="300">
+    您的浏览器不支持播放该视频！
+</video>
+
+实验6视频：
+mario_exp6_v1_12a_4f_seed2
+<video src="https://imgbed-hk.oss-cn-hongkong.aliyuncs.com/img/mario_exp6_v1_12a_4f_seed2.mp4" controls="controls" width="500" height="300">
+    您的浏览器不支持播放该视频！
+</video>
+
 
 # 1.1 本项目使用uv进行包管理，只需要uv sync则可完成环境设置
 ```
